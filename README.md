@@ -41,4 +41,6 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 ## Build for file system
 
 Maybe the app is used locally without a web server. In this case, there are some additional steps needed after running `npm run build`.<br>
-Make all references in build/index.html to other files relative on file system (./path/to/file). Otherwise the app will stay blank.
+1. Make all references in build/index.html to other files relative on file system (./path/to/file). Otherwise the app will stay blank.
+2. Change title in build/index.html to desired name
+3. Move the whole content of the build/ folder to the desired location and double click the index.html

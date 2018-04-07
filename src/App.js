@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AnalogClock, { Themes } from 'react-analog-clock';
 import BoardColumn from './BoardColumn';
 import BoardButton from './BoardButton';
+import Countdown from './Countdown';
 
 import './App.css';
 
@@ -26,7 +27,8 @@ class App extends Component {
 
         <div className="columns is-8">
           <BoardColumn title="Filtertestgeräte">
-
+            <Countdown title="A9295" duration={172800000} interval={60000} />
+            <Countdown title="A8500" duration={172800000} interval={60000} />
           </BoardColumn>
 
           <BoardColumn title="Infos">

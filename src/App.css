@@ -27,3 +27,23 @@ div.title-container {
 .button {
   width: 100%;
 }
+
+
+/*Countdown setter*/
+
+.countdown-setter {
+  background-color: #3273dc !important;
+  color: white !important;
+}
+
+.countdown-setter h4 {
+  color: white !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.form-stack {
+  margin: 10px 0;
+}
