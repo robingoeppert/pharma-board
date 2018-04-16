@@ -76,10 +76,8 @@ export default class Countdown extends Component {
 
     if (runningTime >= (duration * 0.75) && runningTime < (duration * 0.875)) {
       progressClass = 'is-warning';
-    } else if (runningTime >= (duration * 0.875) && runningTime < duration) {
+    } else if (runningTime >= (duration * 0.875)) {
       progressClass = 'is-danger';
-    } else if (runningTime >= duration) {
-      progressClass = 'is-success';
     } else {
       progressClass = 'is-primary';
     }
