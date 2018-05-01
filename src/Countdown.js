@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 
 /**
@@ -11,6 +12,8 @@ export default class Countdown extends Component {
     super(props);
 
     this.state = {
+      startDay: moment().format('YYYY-MM-DD'),
+      startTime: moment().format('HH:mm'),
       isRunning: false,
       isComplete: false,
       progressClass: 'is-primary'
