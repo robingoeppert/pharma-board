@@ -16,7 +16,7 @@ export default class Countdown extends Component {
     // Load existing State from cache
     this.cachedState = JSON.parse(localStorage.getItem(this.id));
 
-    if (this.cachedState.startDay && this.cachedState.startTime) {
+    if (this.cachedState && this.cachedState.startDay && this.cachedState.startTime) {
       this.state = this.cachedState;
     } else {
       this.state = {
@@ -35,7 +35,7 @@ export default class Countdown extends Component {
   }
 
   componentDidMount() {
-    if (this.cachedState.startDay && this.cachedState.startTime && this.cachedState.isRunning) {
+    if (this.cachedState && this.cachedState.startDay && this.cachedState.startTime && this.cachedState.isRunning) {
       this.start();
     }
   }
