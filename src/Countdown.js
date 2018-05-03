@@ -11,18 +11,33 @@ export default class Countdown extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      startDay: moment().format('YYYY-MM-DD'),
-      startTime: moment().format('HH:mm'),
-      isRunning: false,
-      isComplete: false,
-      progressClass: 'is-primary'
-    };
+    this.id = 'countdown-' + this.props.title;
+
+    // Load existing State from cache
+    this.cachedState = JSON.parse(localStorage.getItem(this.id));
+
+    if (this.cachedState.startDay && this.cachedState.startTime) {
+      this.state = this.cachedState;
+    } else {
+      this.state = {
+        startDay: moment().format('YYYY-MM-DD'),
+        startTime: moment().format('HH:mm'),
+        isRunning: false,
+        isComplete: false,
+        progressClass: 'is-primary'
+      };
+    }
 
     this.onDayChange = this.onDayChange.bind(this);
     this.onTimeChange = this.onTimeChange.bind(this);
     this.start = this.start.bind(this);
     this.stop = this.stop.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.cachedState.startDay && this.cachedState.startTime && this.cachedState.isRunning) {
+      this.start();
+    }
   }
 
 
@@ -42,14 +57,14 @@ export default class Countdown extends Component {
 
   start() {
     if (this.state.startDay && this.state.startTime) {
-      const startDay = this.state.startDay;
-      const startTime = this.state.startTime;
-      const startDate = new Date(startDay + ' ' + startTime);
+      const startDate = new Date(this.state.startDay + ' ' + this.state.startTime);
 
       this.setState({
         isRunning: true,
         startDate: startDate.getTime()
       });
+
+      localStorage.setItem(this.id, JSON.stringify(this.state));
 
       this.intervalId = setInterval(() => this.tick(), this.props.interval);
     }
@@ -63,7 +78,9 @@ export default class Countdown extends Component {
 
     this.setState({
       isRunning: false
-    })
+    }, () => {
+      localStorage.setItem(this.id, JSON.stringify(this.state));
+    });
   }
 
   tick() {
@@ -90,6 +107,8 @@ export default class Countdown extends Component {
       isComplete: isComplete,
       progressClass: progressClass
     });
+
+    localStorage.setItem(this.id, JSON.stringify(this.state));
 
     if (isComplete) {
       this.stop();
